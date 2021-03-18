@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/">LOGO</a>
+</nav>
+<body class="">
+<div class="wrapper ">
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title ">City Info</h4>
+              <p scope="col"><button class="btn btn-success" (click)="open(null, content)">+ ADD CITY</button></p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                  <th>Name</th>
+                  <th>Info</th>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let city of cities">
+                    <td>{{city.name}}</td>
+                    <td>{{city.info}}</td>
+                    <td><button class="btn btn-primary" (click)="open(city,content)">Edit</button></td>
+                    <td><button class="btn btn-danger" (click)="delete(city)"> Delete</button></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+<ng-template #content let-modal>
+  <ng-container *ngIf="city">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add/Edit city</h4>
+      <button type="button" class="close"
+              aria-label="Close" (click)=cancel()>
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <h5>Name: </h5>
+          <input type="text" name="name" [(ngModel)]="city.name"/>
+        </div>
+        <div class="form-group">
+          <h5>Info: </h5>
+          <textarea name="options" cols="40" rows="3" [(ngModel)]="city.info"></textarea>
+        </div>
+        <button (click)=createUpdate() class="btn btn-success">SAVE</button>
+        <button (click)=cancel() class="btn btn-danger">Cancel</button>
+      </form>
+    </div>
+  </ng-container>
+</ng-template>
